@@ -1,0 +1,26 @@
+/*!
+ * Start Bootstrap - Full Slider (https://startbootstrap.com/template-overviews/full-slider)
+ * Copyright 2013-2017 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-full-slider/blob/master/LICENSE)
+ */
+
+ :root {
+   --ios-gap: 0px;
+ }
+
+.carousel-item {
+  /* If you need to support browser without CSS var support */
+  min-height: calc(100vh);
+  /* buggyFill will work on iOS 9.3+ only */
+  min-height: calc(100vh - var(--ios-gap));
+  /* height: 100vh; */
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#carousel-top {
+    z-index: 2000;
+}

@@ -1,0 +1,55 @@
+html, body {
+    width: 100%;
+}
+
+.card-login {
+  max-width: 25rem;
+}
+
+.card-register {
+  max-width: 40rem;
+}
+
+.shadow {
+	box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2), 0 0 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.card-btn-group {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.card-btn-group-slim {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.card-btn-group-b {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.text-shadow {
+    text-shadow: 0px 0px 10px #000000;
+}
+
+#sortable {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+#sortable li {
+    margin: 0 3px 3px 3px;
+    padding: 0.4em;
+    padding-left: 1.5em;
+    font-size: 1.4em;
+}
+#sortable li span {
+    position: absolute;
+    margin-left: -1.3em;
+    height: 30px;
+}

@@ -1,0 +1,75 @@
+/* Lazy Load Styles */
+.collection-image {
+	display: block;
+	min-height: 18rem; /* layout hack */
+	max-height: 18rem;
+	height: 18rem;
+	background: #fff center center no-repeat;
+	background-color: #111111;
+	background-size: cover;
+	background-position: center top;
+	filter: blur(3px); /* blur the lowres image */
+}
+
+.collection-image > img {
+	display: block;
+	width: 100%;
+	opacity: 0; /* visually hide the img element */
+    background-position: center top;
+}
+
+.collection-image.is-loaded {
+	filter: none; /* remove the blur on fullres image */
+	transition: filter 1s;
+    background-position: center top;
+}
+
+.collection-list {
+	display: block;
+	margin: 1rem auto;
+	padding: 0;
+	font-size: 0;
+	text-align: center;
+	list-style: none;
+}
+
+.collection {
+	display: inline-block;
+	background-color: #111111;
+    background-position: center top;
+	width: 90%;
+	max-width: 19rem;
+	margin: 1.2rem;
+	font-size: 1rem;
+	text-decoration: none;
+	overflow: hidden;
+	box-shadow: 0 0 3rem -1rem rgba(0,0,0,0.5);
+	transition: transform 0.25s ease-in-out, box-shadow 0.25s;
+}
+
+.collection:hover {
+	transform: translateY(-0.5rem) scale(1.0125);
+	box-shadow: 0 0.5em 3rem -1rem rgba(0,0,0,0.5);
+}
+
+.collection-description {
+	display: block;
+	color: #fff;
+	background-color: #111111;
+	text-decoration: none;
+}
+
+.collection-description:hover {
+	color: #fff;
+	text-decoration: none;
+}
+
+.collection-description > h2 {
+	margin: 0.2em;
+	margin-left: 0.5em;
+	text-align: left;
+	font-family: 'Montserrat', serif;
+	text-transform: uppercase;
+	font-size: 0.9em;
+	font-weight: bold;
+}

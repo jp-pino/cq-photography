@@ -1,0 +1,170 @@
+<?php if(isset($_SESSION["error"])): ?>
+<div class="container">
+    <div class="alert alert-danger alert-dismissible fade show mt-5" role="alert">
+        <?=$_SESSION["error"]?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
+<?php endif; ?>
+
+<?php if(isset($_SESSION["error-delete"])): ?>
+<div class="container">
+    <div class="alert alert-danger alert-dismissible fade show mt-5" role="alert">
+        <?=$_SESSION["error-delete"]?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
+<?php endif; ?>
+
+<?php if(isset($_SESSION["alert"])): ?>
+<div class="container">
+    <div class="alert alert-success alert-dismissible fade show mt-5" role="alert">
+        <?=$_SESSION["alert"]?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
+<?php endif; ?>
+
+<div class="container pt-4">
+    <div class="row">
+        <div class="col-md-4 pt-4">
+            <div class="container">
+                <div class="row">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Gestor de Contenidos</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Sobre mí - Citas</h6>
+                            <p class="card-text">Las citas que se muestran en esta sección serán las que se muestren en la página "Sobre mí".</p>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-quote"><i class="fas fa-plus"></i> Agregar referencia</button>
+                        </div>
+                    </div>
+                </div>
+                <?php getQuotes(htmlspecialchars($_SERVER['PHP_SELF'])); ?>
+            </div>
+        </div>
+        <div class="col-md-8 mt-4">
+            <div class="row">
+                <div class="container">
+                    <h2 class="text-white">Sobre mí</h2>
+                    <h6 class="text-white">Biografía</h6>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-4 mt-3">
+                    <div class="card w-100 h-100">
+                        <div class="card-btn-group-b">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-image"><i class="fas fa-pencil-alt"></i></button>
+                        </div>
+                        <img class="card-img" src="<?php echo getContentImage(); ?>" alt="Card image">
+                    </div>
+                </div>
+                <div class="col-xl-8 mt-3">
+                    <div class="card h-100 w-100">
+                        <div class="card-header">Descripción</div>
+                        <div class="card-body">
+                            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <textarea class="form-control" rows="7" id="description" name="bio" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante..." required><?php echo getBio();?></textarea>
+                                </div>
+                                <div class="py-4 d-lg-block d-xl-none"></div>
+                                <div class="card-btn-group-b">
+                                    <input type="submit" class="btn btn-primary" name="description" value="Registrar">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card my-3">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title text-white text-shadow">Fondo en Biografía</h5>
+                            <div class="card-btn-group-b">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-back-image"><i class="fas fa-pencil-alt"></i></button>
+                            </div>
+                        </div>
+                        <img class="card-img" src="<?php echo getBackgroundImage(); ?>" alt="Card image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="add-quote" tabindex="-1" role="dialog" aria-labelledby="addCollection" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Agregar referencia</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="content">Contenido</label>
+                        <textarea class="form-control" id="description" name="content" rows="5" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Autor</label>
+                        <input name="name" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Autor de la cita..." required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" name="add-quote" value="add-quote"><i class='fas fa-plus'></i> Agregar referencia</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="edit-image" tabindex="-1" role="dialog" aria-labelledby="changeSelfie" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modificar imagen</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <input id="pictures" name="pictures[]" type="file" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" name="edit-image" value="edit-image"><i class='fas fa-plus'></i> Agregar imagen</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="edit-back-image" tabindex="-1" role="dialog" aria-labelledby="changeBackground" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modificar fondo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <input id="pictures2" name="pictures[]" type="file" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" name="edit-back-image" value="edit-back-image"><i class='fas fa-plus'></i> Agregar imagen</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

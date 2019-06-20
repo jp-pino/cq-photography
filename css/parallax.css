@@ -1,0 +1,98 @@
+/**
+ * @Author: Andrea Alba
+ * @Date:   2018-03-24T10:39:36+01:00
+ * @Email:  subjuliodesign@gmail.com
+ * @Project: Parallax Effect with CSS3
+ * @Filename: parallax.css
+ * @Last modified by:   Andrea Alba
+ * @Last modified time: 2018-03-27T03:36:08+02:00
+ * @Copyright: subjuliodesign
+ */
+
+
+
+
+/* =======================
+#Parallax
+======================= */
+.parallax1 {min-height: 100%;
+  /* background-color: #08AEEA; */
+background-image: url('https://source.unsplash.com/1400x900/?tropical'), -webkit-gradient(linear, left bottom, left top, from(#08AEEA), to(#2AF598));
+background-image: url('https://source.unsplash.com/1400x900/?tropical'), linear-gradient(0deg, #08AEEA 0%, #2AF598 100%);
+}
+
+
+.parallax1 {position: relative; background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover;
+background-blend-mode: multiply;}
+
+.parallax__caption {position: absolute; top: 40%; width: 100%; text-align: center;}
+.parallax__caption span {text-align: center; font-size: 60px; font-weight: bold; letter-spacing: 10px; color: #0288D1;
+-webkit-filter: hue-rotate(130deg);
+        filter: hue-rotate(130deg);
+mix-blend-mode: screen;
+}
+
+
+/* ########################
+Media Queries
+######################## */
+
+/* ------------------------
+#Desktop, iPad Pro
+------------------------ */
+@media only screen and (min-width: 1024px) and (max-width: 1170px) {
+
+}
+
+/* ------------------------
+#Display 12", iPad Pro portrait, iPad landscape
+------------------------ */
+@media only screen and (max-width: 1024px) {
+
+}
+
+/* ------------------------
+#Medium Devices, Desktops
+------------------------ */
+@media only screen and (max-width: 992px) {
+
+  /* #Typography */
+  h1 {font-size: 2.5em; line-height: 1.125em;}
+  h2 {font-size: 2em;}
+
+}
+
+/* ------------------------
+#Display 5.5", iPad portrait, iPhone 6, 6s, 7, 8 portrait and landscape, iPhone 5s landscape
+------------------------ */
+@media only screen and (max-width: 768px) {
+
+  /* #Typography */
+  h2 {font-size: 1.625em;}
+  h3 {font-size: 1.5em;}
+
+  /* #Parallax */
+  .chapter1,
+  .chapter2,
+  .chapter3 {padding: 30px 30px;}
+
+}
+
+/* ------------------------
+#Extra Small Devices, Phones
+------------------------ */
+@media only screen and (max-width: 480px) {
+
+
+  .parallax {background-attachment: scroll;}
+
+  .parallax__caption span {font-size: 30px; letter-spacing: 5px;}
+
+}
+
+/* ------------------------
+#Display 4", iPhone 5s portrait
+------------------------ */
+@media only screen and (max-width: 320px) {
+
+}

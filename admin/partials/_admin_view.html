@@ -1,0 +1,176 @@
+<?php if(isset($_SESSION["error_delete"])): ?>
+<div class="container">
+    <div class="alert alert-danger alert-dismissible fade show mt-5" role="alert">
+        <?=$_SESSION["error_delete"]?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
+<?php endif; ?>
+
+<?php if(isset($_SESSION["alert"])): ?>
+<div class="container">
+    <div class="alert alert-success alert-dismissible fade show mt-5" role="alert">
+        <?=$_SESSION["alert"]?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
+<?php endif; ?>
+
+<div class="row">
+    <div class="col">
+        <div class="container">
+            <h2 class="text-white mt-5">CAROUSEL</h2>
+        </div>
+
+        <div class="container">
+            <div class="card-columns mt-1">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Gestor de Fotos</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Página principal - Carousel</h6>
+                        <p class="card-text">Las fotos que se muestran en esta sección serán las que se muestren en el Carousel de la página principal.</p>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-carousel"><i class="fas fa-plus"></i> Agregar imagen</button>
+                    </div>
+                </div>
+                <?php getCarousel(htmlspecialchars($_SERVER['PHP_SELF'])); ?>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="col">
+        <div class="container mt-4">
+            <h2 class="text-white">Carousel</h2>
+        </div>
+        <div class="d-flex align-items-center justify-content-center h-100 mt-1">
+            <img src="../gallery/collection1/_MG_0137.jpg" class="img-thumbnail ml-auto mr-2" alt="Cinque Terre" style="width: 100px;">
+            <img src="../gallery/collection1/_MG_0137.jpg" class="img-thumbnail mx-2" alt="Cinque Terre" style="width: 100px;">
+            <img src="../gallery/collection1/_MG_0137.jpg" class="img-thumbnail mx-2" alt="Cinque Terre" style="width: 100px;">
+            <img src="../images/add-icon.png" class="img-thumbnail ml-2 mr-auto" alt="Cinque Terre" style="width: 100px;">
+        </div>
+    </div> -->
+</div>
+
+<div class="row">
+    <div class="col">
+        <div class="container">
+            <h2 class="text-white mt-5">COLECCIONES</h2>
+        </div>
+
+        <div class="container">
+            <div class="card-columns mt-1">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Gestor de Colecciones</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Página principal - Galería</h6>
+                        <p class="card-text">Estas son las galerías que se mostrarán en la página principal. Para modificar su contenido, título o descripcion presionar el botón de editar.</p>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-collection"><i class="fas fa-plus"></i> Agregar colección</button>
+                        <!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#sort-collections"><i class="fas fa-plus"></i> Ordenar</button> -->
+                    </div>
+                </div>
+                <?php getCollections(); ?>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="col">
+        <div class="container mt-4">
+            <h2 class="text-white">Carousel</h2>
+        </div>
+        <div class="d-flex align-items-center justify-content-center h-100 mt-1">
+            <img src="../gallery/collection1/_MG_0137.jpg" class="img-thumbnail ml-auto mr-2" alt="Cinque Terre" style="width: 100px;">
+            <img src="../gallery/collection1/_MG_0137.jpg" class="img-thumbnail mx-2" alt="Cinque Terre" style="width: 100px;">
+            <img src="../gallery/collection1/_MG_0137.jpg" class="img-thumbnail mx-2" alt="Cinque Terre" style="width: 100px;">
+            <img src="../images/add-icon.png" class="img-thumbnail ml-2 mr-auto" alt="Cinque Terre" style="width: 100px;">
+        </div>
+    </div> -->
+</div>
+
+<div class="modal fade" id="add-carousel" tabindex="-1" role="dialog" aria-labelledby="addCollection" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Agregar a carousel</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <input id="pictures" name="pictures[]" type="file" multiple>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" name="carousel" value="carousel"><i class='fas fa-plus'></i> Agregar imagen</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="add-collection" tabindex="-1" role="dialog" aria-labelledby="addCollection" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Crear colección</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input name="name" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Nombre de la colección..." required>
+                        <small class="form-text text-muted">Nombres cortos son preferidos.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Descripción</label>
+                        <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" name="collection" value="collection"><i class='fas fa-plus'></i> Agregar colección</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="modal fade" id="sort-collections" tabindex="-1" role="dialog" aria-labelledby="sortCollections" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ordenar colecciones</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="add_collection.php" method="POST">
+                <ul id="sortable" class="mt-4 ml-3">
+                    <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
+                    <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
+                    <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
+                    <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
+                    <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
+                    <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
+                    <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
+                </ul>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input name="name" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Nombre de la colección..." required>
+                        <small class="form-text text-muted">Nombres cortos son preferidos.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Descripción</label>
+                        <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" value="Submit"><i class='fas fa-plus'></i> Agregar colección</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> -->
